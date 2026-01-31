@@ -16,7 +16,7 @@ export default async function Home() {
         <header className="p-8 border-b border-zinc-100 dark:border-zinc-800 flex justify-between items-center">
           <div>
             <h1 className="text-2xl font-bold tracking-tight text-black dark:text-white">
-              CourtSight Dashboard
+              CourtSight
             </h1>
             <p className="text-zinc-500 text-sm">NCAA DII & Local BC Recruitment</p>
           </div>
