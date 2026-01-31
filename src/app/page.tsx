@@ -63,6 +63,14 @@ export default async function Home() {
                     "{player.aiArchetype}"
                   </p>
                 </div>
+
+                <div className="mt-4 bg-zinc-50 dark:bg-zinc-700/50 p-3 rounded-xl">
+                  <p className="text-[10px] font-bold text-zinc-400 uppercase">AI Summary</p>
+                  <p className="text-sm font-medium text-zinc-700 dark:text-zinc-300 italic">
+                    "{player.aiSummarization}"
+                    </p>
+                </div>
+
               </div>
             ))}
           </div>
