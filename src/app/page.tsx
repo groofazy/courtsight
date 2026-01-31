@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { promises as fs } from 'fs';
 import path from 'path';
+import { Analytics } from "@vercel/analytics/next";
 
 export default async function Home() {
   // 1. Fetching the local JSON data
