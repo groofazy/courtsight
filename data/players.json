@@ -2,8 +2,11 @@
     {
         "id": "a1",
         "name": "Cory Moore",
-        "height": "6'7\"",
-        "school": "Queen Elizabeth Secondary",
+        "bio": {
+            "height": "6'7\"",
+            "school": "Queen Elizabeth Secondary",
+            "grad": 2023
+        },
         "stats": {
             "ppg": 18.6,
             "rpg": 7.3,
@@ -15,8 +18,11 @@
     {
         "id": "a2",
         "name": "Devansh Kochhar",
-        "height": "6'0\"",
-        "school": "Queen Elizabeth Secondary",
+        "bio": {
+            "height": "6'0\"",
+            "school": "Queen Elizabeth Secondary",
+            "grad": 2023
+        },
         "stats": {
             "ppg": 12.2,
             "rpg": 10.3,
@@ -28,8 +34,11 @@
     {
         "id": "a3",
         "name": "Gabe Gamboa",
-        "height": "5'9\"",
-        "school": "Queen Elizabeth Secondary",
+        "bio": {
+            "height": "5'9\"",
+            "school": "Queen Elizabeth Secondary",
+            "grad": 2023
+        },
         "stats": {
             "ppg": 10.2,
             "rpg": 4.3,
