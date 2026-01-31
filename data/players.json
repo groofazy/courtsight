@@ -13,7 +13,8 @@
             "apg": 2.2
         },
         "aiArchetype": "Paint Beast",
-        "starRating": 4.3
+        "starRating": 4.3,
+        "aiSummarization": "He's good at Basketball"
     },
     {
         "id": "a2",
@@ -29,7 +30,8 @@
             "apg": 5.2
         },
         "aiArchetype": "Lebron James",
-        "starRating": 4.2
+        "starRating": 4.2,
+        "aiSummarization": "He's good at Basketball"
     }, 
     {
         "id": "a3",
@@ -45,6 +47,7 @@
             "apg": 12.2
         },
         "aiArchetype": "Point God",
-        "starRating": 5
+        "starRating": 5,
+        "aiSummarization": "He's good at Basketball"
     }
 ]
