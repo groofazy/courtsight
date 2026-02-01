@@ -2,6 +2,7 @@
     {
         "id": "b1",
         "name": "Nylan Roberts",
+        "imageUrl": "",
         "jersey": "0",
         "bio": {
             "height": "6'7\"",
@@ -29,6 +30,7 @@
     {
         "id": "b2",
         "name": "Justin Sunga",
+        "imageUrl": "",
         "jersey": "2",
         "bio": {
             "height": "5'10\"",
@@ -56,6 +58,7 @@
     {
         "id": "b3",
         "name": "Nikola Guzina",
+        "imageUrl": "",
         "jersey": "6",
         "bio": {
             "height": "6'10\"",
@@ -83,6 +86,7 @@
     {
         "id": "b4",
         "name": "Chris Ainsley",
+        "imageUrl": "",
         "jersey": "11",
         "bio": {
             "height": "6'6\"",
@@ -110,6 +114,7 @@
     {
         "id": "b5",
         "name": "Milan Pasquale",
+        "imageUrl": "",
         "jersey": "5",
         "bio": {
             "height": "6'2\"",
@@ -137,6 +142,7 @@
     {
         "id": "b6",
         "name": "Toren Franklin",
+        "imageUrl": "",
         "jersey": "10",
         "bio": {
             "height": "6'1\"",
@@ -164,6 +170,7 @@
     {
         "id": "b7",
         "name": "Raj Dhadda",
+        "imageUrl": "",
         "jersey": "7",
         "bio": {
             "height": "6'5\"",
@@ -191,6 +198,7 @@
     {
         "id": "b8",
         "name": "Karan Aujla",
+        "imageUrl": "",
         "jersey": "15",
         "bio": {
             "height": "6'8\"",

@@ -1,32 +1,36 @@
-import players from "@data/players.json";
+import Header from "@/components/Header";
+import WelcomeHero from "@/components/WelcomeHero";
 import DashboardGrid from "@/components/DashboardGrid";
+import players from "@data/players.json";
+import PlayerCard from "@/components/PlayerCard";
 
-export default async function Home() {
+export default function Home() {
+  // Filter for 'featured' players (e.g., those with 5 stars)
+  const featuredPlayers = players.filter(p => p.starRating === 5);
+
   return (
-    <main className="min-h-screen bg-zinc-50 dark:bg-black px-6 py-12 sm:px-12">
-      <div className="max-w-5xl mx-auto">
-        
-        {/* CourtSight Header */}
-        <header className="mb-12">
-          <h1 className="text-4xl font-extrabold tracking-tight text-zinc-900 dark:text-white">
-            CourtSight
-          </h1>
-          <p className="mt-2 text-lg text-zinc-500 dark:text-zinc-400">
-            Regional Scouting Dashboard • BC High School Athletics
-          </p>
-        </header>
+    <main className="min-h-screen bg-black">
+      <Header />
+      
+      <div className="max-w-7xl mx-auto px-6">
+        <WelcomeHero />
 
-        {/* DashboardGrid now handles the filtering buttons 
-          AND the player grid display internally.
-        */}
+        {/* FEATURED CAROUSEL SECTION */}
+        <section className="mb-16">
+          <h3 className="text-[10px] font-bold text-blue-500 uppercase tracking-[0.3em] mb-6">
+            Top Tier Prospects
+          </h3>
+          {/* We will build the Carousel component next */}
+          <div className="flex gap-6 overflow-x-auto pb-6 scrollbar-hide">
+            {featuredPlayers.map(p => (
+               <div key={p.id} className="min-w-[300px]">
+                 <PlayerCard player={p} />
+               </div>
+            ))}
+          </div>
+        </section>
+
         <DashboardGrid players={players} />
-
-        {/* Footer/Meta Info */}
-        <footer className="mt-16 border-t border-zinc-200 dark:border-zinc-800 pt-8 text-center">
-          <p className="text-sm text-zinc-400">
-            Internal Use Only • AI-Generated Performance Summaries
-          </p>
-        </footer>
       </div>
     </main>
   );

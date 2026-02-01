@@ -64,9 +64,9 @@ const filterConfigs = [
     </div>
 
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pb-12">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pb-12">
         {filteredPlayers.map((player) => (
-          <Link href={`/player/${player.id}`} key={player.id} className="block hover:scale-[1.01] transition-transform">
+          <Link href={`/player/${player.id}`} key={player.id} className="block transition-transform duration-200 hover:scale-[1.02]">
             <PlayerCard player={player} />
           </Link>
         ))}
