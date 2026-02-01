@@ -4,12 +4,25 @@ import { useSearchParams } from "next/navigation";
 import players from "@data/players.json";
 import PlayerImage from "@/components/PlayerImage";
 import Link from "next/link";
-import { ArrowLeft, Swords, Trophy, Activity, Info, Crosshair, Shield } from "lucide-react";
-import { Radar, RadarChart, PolarGrid, PolarAngleAxis, ResponsiveContainer } from 'recharts';
+import { 
+  ArrowLeft, 
+  Activity, 
+  Info, 
+  Crosshair, 
+  Shield, 
+  NotebookPen 
+} from "lucide-react";
+import { 
+  Radar, 
+  RadarChart, 
+  PolarGrid, 
+  PolarAngleAxis, 
+  ResponsiveContainer 
+} from 'recharts';
+import { useBookmarks } from "@/hooks/useBookmarks";
 
 /**
  * 1. RADAR CHART COMPONENT
- * Normalizes JSON stats to a 0-100 scale for visual balance.
  */
 function ComparisonRadar({ p1, p2 }: { p1: any, p2: any }) {
   const data = [
@@ -43,7 +56,7 @@ function ComparisonRadar({ p1, p2 }: { p1: any, p2: any }) {
   return (
     <div className="h-[450px] w-full bg-zinc-900/10 rounded-3xl border border-zinc-900/50 my-4 p-4 relative">
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <span className="font-audiowide text-[10rem] text-zinc-900/30 italic select-none">VS</span>
+        <span className="font-audiowide text-[10rem] text-zinc-900/30 italic select-none uppercase">VS</span>
       </div>
       <ResponsiveContainer width="100%" height="100%">
         <RadarChart cx="50%" cy="50%" outerRadius="80%" data={data}>
@@ -59,10 +72,10 @@ function ComparisonRadar({ p1, p2 }: { p1: any, p2: any }) {
 
 /**
  * 2. MAIN CONTENT COMPONENT
- * Handles URL params and organized the 3-column layout + tables.
  */
 function CompareContent() {
   const searchParams = useSearchParams();
+  const { notes } = useBookmarks();
   const p1Id = searchParams.get("p1");
   const p2Id = searchParams.get("p2");
 
@@ -107,6 +120,24 @@ function CompareContent() {
       {/* Categorized Detailed Analysis */}
       <div className="max-w-4xl mx-auto space-y-16 pb-32">
         
+        {/* Scout Observations Section */}
+        <StatSection title="Scout Observations" icon={<NotebookPen size={14}/>}>
+          <div className="grid grid-cols-2 gap-0 divide-x divide-zinc-800">
+            <div className="p-8 bg-emerald-500/[0.02]">
+              <p className="text-[9px] text-emerald-500/50 uppercase font-bold mb-4 tracking-widest font-audiowide">Notes on {p1.name}</p>
+              <p className="text-sm text-zinc-400 italic leading-relaxed">
+                {notes[p1.id] ? `"${notes[p1.id]}"` : "No specific notes recorded for this prospect."}
+              </p>
+            </div>
+            <div className="p-8 text-right bg-white/[0.01]">
+              <p className="text-[9px] text-zinc-600 uppercase font-bold mb-4 tracking-widest font-audiowide">Notes on {p2.name}</p>
+              <p className="text-sm text-zinc-400 italic leading-relaxed">
+                {notes[p2.id] ? `"${notes[p2.id]}"` : "No specific notes recorded for this prospect."}
+              </p>
+            </div>
+          </div>
+        </StatSection>
+
         <StatSection title="Bio & Academic Profile" icon={<Info size={14}/>}>
           <ComparisonRow label="GPA" val1={p1.bio.gpa} val2={p2.bio.gpa} highlight={getStatClass} />
           <ComparisonRow label="Height" val1={p1.bio.height} val2={p2.bio.height} isText />
@@ -139,12 +170,12 @@ function CompareContent() {
 }
 
 /**
- * 3. EXPORT WRAPPED IN SUSPENSE (For Vercel Build)
+ * 3. EXPORT
  */
 export default function ComparePage() {
   return (
-    <main className="min-h-screen bg-black text-white p-8 pt-24">
-      <Suspense fallback={<div className="text-center py-40 font-audiowide animate-pulse text-emerald-500">Initializing Comparison Engine...</div>}>
+    <main className="min-h-screen bg-black text-white p-8 pt-24 leading-normal">
+      <Suspense fallback={<div className="text-center py-40 font-audiowide animate-pulse text-emerald-500 uppercase tracking-widest text-xs italic">Initializing Comparison Engine...</div>}>
         <CompareContent />
       </Suspense>
     </main>
@@ -152,7 +183,7 @@ export default function ComparePage() {
 }
 
 /**
- * 4. UI HELPER COMPONENTS
+ * 4. UI HELPERS
  */
 function StatSection({ title, icon, children }: { title: string, icon: React.ReactNode, children: React.ReactNode }) {
   return (
@@ -201,7 +232,7 @@ function PlayerHeader({ player, align = "left", isWinner }: any) {
           }`} 
         />
         {isWinner && (
-          <div className={`absolute -top-3 ${align === "right" ? "-right-3" : "-left-3"} bg-emerald-500 text-black font-audiowide text-[10px] px-3 py-1 rounded-full italic uppercase shadow-lg`}>
+          <div className={`absolute -top-3 ${align === "right" ? "-right-3" : "-left-3"} bg-emerald-500 text-black font-audiowide text-[10px] px-3 py-1 rounded-full italic uppercase shadow-lg z-10`}>
             Lead Prospect
           </div>
         )}
@@ -213,7 +244,7 @@ function PlayerHeader({ player, align = "left", isWinner }: any) {
         <p className="text-emerald-500 text-xs font-bold uppercase mt-4 tracking-widest font-audiowide">
           {player.aiArchetype}
         </p>
-        <div className={`mt-2 flex gap-2 items-center text-zinc-500 text-[10px] font-bold uppercase ${align === "right" ? "justify-end" : "justify-start"}`}>
+        <div className={`mt-3 flex gap-2 items-center text-zinc-600 text-[10px] font-bold uppercase tracking-tighter ${align === "right" ? "justify-end" : "justify-start"}`}>
           <span>#{player.jersey}</span>
           <span>•</span>
           <span>{player.bio.position}</span>
