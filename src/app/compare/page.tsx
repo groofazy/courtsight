@@ -1,11 +1,13 @@
 "use client";
+import { Suspense } from "react"; // 1. Import Suspense
 import { useSearchParams } from "next/navigation";
 import players from "@data/players.json";
 import PlayerImage from "@/components/PlayerImage";
 import Link from "next/link";
-import { ArrowLeft, Trophy } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 
-export default function ComparePage() {
+// 2. Create a separate component for the logic that uses searchParams
+function CompareContent() {
   const searchParams = useSearchParams();
   const p1Id = searchParams.get("p1");
   const p2Id = searchParams.get("p2");
@@ -15,38 +17,47 @@ export default function ComparePage() {
 
   if (!p1 || !p2) return <div className="text-white p-20">Select two players to compare.</div>;
 
-  // Helper to highlight the better stat
   const getStatClass = (val1: number, val2: number) => {
     if (val1 > val2) return "text-emerald-500 font-bold drop-shadow-[0_0_8px_rgba(16,185,129,0.4)]";
     return "text-zinc-400";
   };
 
   return (
-    <main className="min-h-screen bg-black text-white p-8 pt-24">
-      <div className="max-w-5xl mx-auto">
-        <Link href="/bookmarks" className="flex items-center gap-2 text-zinc-500 hover:text-emerald-500 mb-8 transition-colors">
-          <ArrowLeft size={16} /> <span className="text-xs font-audiowide uppercase italic">Back to Shortlist</span>
-        </Link>
+    <div className="max-w-5xl mx-auto">
+      <Link href="/bookmarks" className="flex items-center gap-2 text-zinc-500 hover:text-emerald-500 mb-8 transition-colors">
+        <ArrowLeft size={16} /> <span className="text-xs font-audiowide uppercase italic">Back to Shortlist</span>
+      </Link>
 
-        <div className="grid grid-cols-3 gap-4 items-end mb-12">
-          <PlayerHeader player={p1} />
-          <div className="flex justify-center pb-10">
-            <span className="font-audiowide text-4xl text-zinc-800 italic">VS</span>
-          </div>
-          <PlayerHeader player={p2} align="right" />
+      <div className="grid grid-cols-3 gap-4 items-end mb-12">
+        <PlayerHeader player={p1} />
+        <div className="flex justify-center pb-10">
+          <span className="font-audiowide text-4xl text-zinc-800 italic">VS</span>
         </div>
-
-        {/* Stat Comparison Table */}
-        <div className="space-y-1 border-t border-zinc-900 pt-8">
-          <ComparisonRow label="PPG" val1={p1.stats.ppg} val2={p2.stats.ppg} highlight={getStatClass} />
-          <ComparisonRow label="RPG" val1={p1.stats.rpg} val2={p2.stats.rpg} highlight={getStatClass} />
-          <ComparisonRow label="APG" val1={p1.stats.apg} val2={p2.stats.apg} highlight={getStatClass} />
-          <ComparisonRow label="BPG" val1={p1.stats.bpg} val2={p2.stats.bpg} highlight={getStatClass} />
-          <ComparisonRow label="GPA" val1={p1.bio.gpa} val2={p2.bio.gpa} highlight={getStatClass} />
-          <ComparisonRow label="FG %" val1={p1.stats.shooting.fg} val2={p2.stats.shooting.fg} highlight={getStatClass} />
-          <ComparisonRow label="3P %" val1={p1.stats.shooting.threeP} val2={p2.stats.shooting.threeP} highlight={getStatClass} />
-        </div>
+        <PlayerHeader player={p2} align="right" />
       </div>
+
+      <div className="space-y-1 border-t border-zinc-900 pt-8">
+        <ComparisonRow label="PPG" val1={p1.stats.ppg} val2={p2.stats.ppg} highlight={getStatClass} />
+        <ComparisonRow label="RPG" val1={p1.stats.rpg} val2={p2.stats.rpg} highlight={getStatClass} />
+        <ComparisonRow label="APG" val1={p1.stats.apg} val2={p2.stats.apg} highlight={getStatClass} />
+        <ComparisonRow label="BPG" val1={p1.stats.bpg} val2={p2.stats.bpg} highlight={getStatClass} />
+        <ComparisonRow label="GPA" val1={p1.bio.gpa} val2={p2.bio.gpa} highlight={getStatClass} />
+        <ComparisonRow label="FG %" val1={p1.stats.shooting.fg} val2={p2.stats.shooting.fg} highlight={getStatClass} />
+      </div>
+    </div>
+  );
+}
+
+// 3. Keep your helper components (ComparisonRow, PlayerHeader) here...
+
+// 4. This is the main page export that Vercel looks for
+export default function ComparePage() {
+  return (
+    <main className="min-h-screen bg-black text-white p-8 pt-24">
+      {/* 5. Wrap the content in Suspense */}
+      <Suspense fallback={<div className="text-white p-20 font-audiowide animate-pulse">Loading Comparison...</div>}>
+        <CompareContent />
+      </Suspense>
     </main>
   );
 }
