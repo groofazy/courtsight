@@ -16,7 +16,7 @@ export async function POST(req: Request) {
 
         const { player } = await req.json();
         const model = genAI.getGenerativeModel(
-            { model: "gemini-1.5-flash" }
+            { model: "gemini-2.5-flash-lite" }
         ); // model for summaries
 
         // master prompt criteria
@@ -72,7 +72,7 @@ export async function POST(req: Request) {
         const summaryText = result.response.text();
 
         return NextResponse.json({ summary: summaryText});
-        
+
     } catch (error) {
         console.error("Gemini Error: ", error);
         return NextResponse.json(
