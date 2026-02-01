@@ -27,6 +27,15 @@ export default function PlayerCard({player}: PlayerInfo) {
       <div className="flex justify-between items-start">
         <div>
           <h3 className="font-bold text-xl text-zinc-900 dark:text-white">{player.name}</h3>
+
+          {/* New Star Rating Row */}
+          <div className="flex items-center gap-2 mt-1 mb-2">
+            <StarRating rating={player.starRating} />
+            <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">
+              Prospect
+            </span>
+          </div>
+
           <p className="text-sm text-zinc-500">{player.bio.school} • Class of {player.bio.grad}</p>
         </div>
         <span className="text-xs font-bold bg-blue-50 text-blue-600 px-2 py-1 rounded uppercase tracking-wider">
@@ -46,11 +55,11 @@ export default function PlayerCard({player}: PlayerInfo) {
         <AIField title="AI Archetype" content={player.aiArchetype} />
       </div>
 
-      {/* The isolated AI section */}
+      {/* The isolated AI section
       <div>
         <ScoutReport
         player={player}/>
-      </div>
+      </div> */}
     </div>
   );
 }
@@ -76,4 +85,27 @@ function AIField({ title, content, isItalic = false }: { title: string; content:
     );
 }
 
-
+function StarRating({ rating }: { rating: number }) {
+  return (
+    <div className="flex gap-0.5">
+      {[...Array(5)].map((_, i) => (
+        <svg
+          key={i}
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill={i < rating ? "currentColor" : "none"}
+          className={`w-4 h-4 ${
+            i < rating ? "text-yellow-400" : "text-zinc-300 stroke-zinc-300"
+          }`}
+          strokeWidth={1.5}
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z"
+          />
+        </svg>
+      ))}
+    </div>
+  );
+}
