@@ -21,16 +21,24 @@ export function SearchFilter({ search, setSearch, sortBy, setSortBy }: SearchFil
         <SearchIcon className="absolute left-3 top-3.5 w-4 h-4 text-zinc-500" />
       </div>
 
-      <div className="flex gap-1 bg-black p-1 rounded-xl border border-zinc-800">
-        {['stars', 'ppg', 'rpg', 'apg'].map((key) => (
+      <div className="flex flex-wrap gap-1 bg-black p-1 rounded-xl border border-zinc-800">
+        {[
+          { id: 'stars', label: 'Rank' },
+          { id: 'ppg', label: 'PPG' },
+          { id: 'fg', label: 'FG%' },
+          { id: 'threeP', label: '3PT%' },
+          { id: 'astToTurnover', label: 'AST/TO' }
+        ].map((item) => (
           <button
-            key={key}
-            onClick={() => setSortBy(key)}
+            key={item.id}
+            onClick={() => setSortBy(item.id)}
             className={`px-4 py-2 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all ${
-              sortBy === key ? "bg-blue-600 text-white shadow-lg" : "text-zinc-500 hover:text-zinc-300"
+              sortBy === item.id 
+                ? "bg-blue-600 text-white shadow-lg" 
+                : "text-zinc-500 hover:text-zinc-300"
             }`}
           >
-            {key === 'stars' ? 'Rank' : key}
+            {item.label}
           </button>
         ))}
       </div>
