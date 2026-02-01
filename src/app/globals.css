@@ -10,11 +10,22 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  /* 1. Add Audiowide Font Mapping */
+  --font-audiowide: "Audiowide", sans-serif;
+
+  /* 2. Theme Override: Remap Blue to Emerald Green */
+  /* This forces all 'blue' classes to display as green */
+  --color-blue-500: var(--color-emerald-500);
+  --color-blue-600: var(--color-emerald-600);
+  
+  /* 3. Add a specific brand color for new elements */
+  --color-brand-green: var(--color-emerald-500);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #000000; /* Deep black for that high-end look */
     --foreground: #ededed;
   }
 }
@@ -22,5 +33,6 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  /* Use Geist or Sans as fallback, but specific components will use Audiowide */
+  font-family: var(--font-sans);
 }

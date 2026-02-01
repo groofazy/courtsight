@@ -9,7 +9,7 @@
             { "game": "G4", "points": 30 },
             { "game": "G5", "points": 22 }
         ],
-        "imageUrl": "",
+        "imageUrl": "/images/players/nylan-roberts.jpg",
         "jersey": "0",
         "bio": {
             "height": "6'7\"",
@@ -44,7 +44,7 @@
             { "game": "G4", "points": 30 },
             { "game": "G5", "points": 22 }
         ],
-        "imageUrl": "",
+        "imageUrl": "/images/players/justin-sunga.jpg",
         "jersey": "2",
         "bio": {
             "height": "5'10\"",
@@ -79,7 +79,7 @@
             { "game": "G4", "points": 30 },
             { "game": "G5", "points": 22 }
         ],
-        "imageUrl": "",
+        "imageUrl": "/images/players/d.jpg",
         "jersey": "6",
         "bio": {
             "height": "6'10\"",
@@ -254,7 +254,7 @@
             { "game": "G4", "points": 30 },
             { "game": "G5", "points": 22 }
         ],
-        "imageUrl": "",
+        "imageUrl": "/images/players/karan-aujla.jpg",
         "jersey": "15",
         "bio": {
             "height": "6'8\"",

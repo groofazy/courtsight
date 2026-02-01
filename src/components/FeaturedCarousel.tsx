@@ -13,7 +13,7 @@ export default function FeaturedCarousel({ players, title = "Top Tier Prospects"
 
   return (
     <section className="mb-16 relative z-20">
-      <h3 className="text-[14px] font-audiowide- text-blue-500 uppercase tracking-[0.3em] mb-6">
+      <h3 className="text-[20px] font-audiowide- text-blue-500 uppercase tracking-[0.3em] mb-6">
         {title}
       </h3>
       

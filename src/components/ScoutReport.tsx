@@ -1,48 +1,79 @@
 "use client";
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import Markdown from "react-markdown"; // You'll need to install this
 
-// We only pass the player object, nothing else.
 export default function ScoutReport({ player }: { player: any }) {
-  // We initialize the state to an empty string or a generic placeholder.
-  const [summary, setSummary] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  const [report, setReport] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleGenerate = async () => {
-    setIsLoading(true);
+  const generateReport = async () => {
+    if (!player) return;
+    setLoading(true);
     try {
-      const res = await fetch("/api/summarize", {
+      const response = await fetch("/api/summarize", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ player }),
       });
-      const data = await res.json();
-      if (data.summary) setSummary(data.summary);
+      const data = await response.json();
+      setReport(data.summary);
     } catch (error) {
-      console.error("AI Scout failed:", error);
+      console.error("Scout Report Error:", error);
     } finally {
-      setIsLoading(false);
+      setLoading(false);
     }
   };
 
   return (
-    <div className="mt-6 space-y-3">
-      {/* Only show this box IF a summary has been generated */}
-      {summary && (
-        <div className="bg-zinc-50 dark:bg-zinc-700/50 p-3 rounded-xl relative border border-zinc-100">
-          <p className="text-[10px] font-bold text-zinc-400 uppercase">AI Summary</p>
-          <p className="text-sm font-medium text-zinc-700 dark:text-zinc-300 italic">
-            {isLoading ? "Analyzing..." : `"${summary}"`}
-          </p>
-        </div>
-      )}
+    <div className="space-y-6 relative z-30">
+      <AnimatePresence mode="wait">
+        {!report && !loading && (
+          <motion.button 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={generateReport}
+            className="w-full py-4 border border-blue-500/30 bg-blue-500/5 text-blue-500 font-audiowide uppercase text-sm rounded-2xl hover:bg-blue-500/10 transition-all active:scale-95"
+          >
+            Generate AI Scouting Report
+          </motion.button>
+        )}
 
-      <button
-        onClick={handleGenerate}
-        disabled={isLoading}
-        className="w-full py-2 text-xs font-semibold text-blue-600 border border-blue-100 rounded-lg hover:bg-blue-50 transition-colors"
-      >
-        {isLoading ? "Scout is thinking..." : summary ? "Regenerate Report" : "Generate Scout Report"}
-      </button>
+        {loading && (
+          <motion.div 
+            key="loading"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="space-y-3 animate-pulse"
+          >
+            <div className="h-4 bg-zinc-800 rounded w-3/4" />
+            <div className="h-4 bg-zinc-800 rounded w-full" />
+            <div className="h-4 bg-zinc-800 rounded w-5/6" />
+          </motion.div>
+        )}
+
+        {report && (
+          <motion.div 
+            key="report"
+            initial={{ opacity: 0, y: 10 }} 
+            animate={{ opacity: 1, y: 0 }}
+            className="relative"
+          >
+            {/* Swapped the <p> tag for the Markdown component with prose styling */}
+            <div className="prose prose-invert prose-sm max-w-none text-zinc-300 leading-relaxed font-medium whitespace-pre-wrap prose-strong:text-blue-500 prose-strong:font-bold">
+              <Markdown>{report}</Markdown>
+            </div>
+            
+            <button 
+              onClick={() => setReport("")}
+              className="mt-4 text-[10px] font-bold text-zinc-600 uppercase tracking-tighter hover:text-blue-500 transition-colors"
+            >
+              Regenerate Report
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
