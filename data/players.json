@@ -2,6 +2,13 @@
     {
         "id": "b1",
         "name": "Nylan Roberts",
+        "performanceHistory": [
+            { "game": "G1", "points": 18 },
+            { "game": "G2", "points": 24 },
+            { "game": "G3", "points": 15 },
+            { "game": "G4", "points": 30 },
+            { "game": "G5", "points": 22 }
+        ],
         "imageUrl": "",
         "jersey": "0",
         "bio": {
@@ -30,6 +37,13 @@
     {
         "id": "b2",
         "name": "Justin Sunga",
+        "performanceHistory": [
+            { "game": "G1", "points": 18 },
+            { "game": "G2", "points": 24 },
+            { "game": "G3", "points": 15 },
+            { "game": "G4", "points": 30 },
+            { "game": "G5", "points": 22 }
+        ],
         "imageUrl": "",
         "jersey": "2",
         "bio": {
@@ -58,6 +72,13 @@
     {
         "id": "b3",
         "name": "Nikola Guzina",
+        "performanceHistory": [
+            { "game": "G1", "points": 18 },
+            { "game": "G2", "points": 24 },
+            { "game": "G3", "points": 15 },
+            { "game": "G4", "points": 30 },
+            { "game": "G5", "points": 22 }
+        ],
         "imageUrl": "",
         "jersey": "6",
         "bio": {
@@ -86,6 +107,13 @@
     {
         "id": "b4",
         "name": "Chris Ainsley",
+        "performanceHistory": [
+            { "game": "G1", "points": 18 },
+            { "game": "G2", "points": 24 },
+            { "game": "G3", "points": 15 },
+            { "game": "G4", "points": 30 },
+            { "game": "G5", "points": 22 }
+        ],
         "imageUrl": "",
         "jersey": "11",
         "bio": {
@@ -114,6 +142,13 @@
     {
         "id": "b5",
         "name": "Milan Pasquale",
+        "performanceHistory": [
+            { "game": "G1", "points": 18 },
+            { "game": "G2", "points": 24 },
+            { "game": "G3", "points": 15 },
+            { "game": "G4", "points": 30 },
+            { "game": "G5", "points": 22 }
+        ],
         "imageUrl": "",
         "jersey": "5",
         "bio": {
@@ -142,6 +177,13 @@
     {
         "id": "b6",
         "name": "Toren Franklin",
+        "performanceHistory": [
+            { "game": "G1", "points": 18 },
+            { "game": "G2", "points": 24 },
+            { "game": "G3", "points": 15 },
+            { "game": "G4", "points": 30 },
+            { "game": "G5", "points": 22 }
+        ],
         "imageUrl": "",
         "jersey": "10",
         "bio": {
@@ -170,6 +212,13 @@
     {
         "id": "b7",
         "name": "Raj Dhadda",
+        "performanceHistory": [
+            { "game": "G1", "points": 18 },
+            { "game": "G2", "points": 24 },
+            { "game": "G3", "points": 15 },
+            { "game": "G4", "points": 30 },
+            { "game": "G5", "points": 22 }
+        ],
         "imageUrl": "",
         "jersey": "7",
         "bio": {
@@ -198,6 +247,13 @@
     {
         "id": "b8",
         "name": "Karan Aujla",
+        "performanceHistory": [
+            { "game": "G1", "points": 18 },
+            { "game": "G2", "points": 24 },
+            { "game": "G3", "points": 15 },
+            { "game": "G4", "points": 30 },
+            { "game": "G5", "points": 22 }
+        ],
         "imageUrl": "",
         "jersey": "15",
         "bio": {

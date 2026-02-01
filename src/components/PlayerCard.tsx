@@ -49,7 +49,7 @@ export default function PlayerCard({ player }: PlayerInfo) {
       <div className="flex justify-between items-start">
         <div>
           <div className="flex items-center gap-2">
-            <h3 className="font-bold text-xl text-zinc-900 dark:text-white">
+            <h3 className="font-audiowide text-xl text-zinc-900 dark:text-white">
               {player.name}
             </h3>
             <span className="text-zinc-400 font-audiowide text-sm">#{player.jersey}</span>
@@ -57,7 +57,7 @@ export default function PlayerCard({ player }: PlayerInfo) {
 
           <div className="flex items-center gap-2 mt-1 mb-2">
             <StarRating rating={player.starRating} />
-            <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">
+            <span className="text-[10px] font-bold-audiowide text-zinc-400 uppercase tracking-widest">
               Prospect
             </span>
           </div>
