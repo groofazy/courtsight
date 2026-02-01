@@ -1,5 +1,7 @@
 // components/PlayerCard.tsx
 
+import ScoutReport from "./ScoutReport";
+
 // general data for PlayerCard component
 interface PlayerInfo{
     player: {
@@ -16,7 +18,6 @@ interface PlayerInfo{
     };
     aiArchetype: string;
     starRating: number;
-    aiSummarization: string;
     };
 }
 
@@ -43,7 +44,12 @@ export default function PlayerCard({player}: PlayerInfo) {
       {/* AI Content Section */}
       <div className="mt-6 space-y-3">
         <AIField title="AI Archetype" content={player.aiArchetype} />
-        <AIField title="AI Summary" content={player.aiSummarization} isItalic />
+      </div>
+
+      {/* The isolated AI section */}
+      <div>
+        <ScoutReport
+        player={player}/>
       </div>
     </div>
   );
