@@ -1,51 +1,218 @@
 [
     {
-        "id": "a1",
-        "name": "Cory Moore",
+        "id": "b1",
+        "name": "Nylan Roberts",
+        "jersey": "0",
         "bio": {
             "height": "6'7\"",
-            "school": "Queen Elizabeth Secondary",
-            "grad": 2023
+            "wingspan": "6'10\"",
+            "weight": "210 lbs",
+            "school": "Yale Secondary",
+            "clubTeam": "BC United",
+            "gpa": 3.8,
+            "grad": 2026,
+            "position": "Forward",
+            "hand": "Right"
         },
         "stats": {
-            "ppg": 18.6,
-            "rpg": 7.3,
-            "apg": 2.2
+            "ppg": 22.4,
+            "rpg": 9.2,
+            "apg": 3.1,
+            "spg": 1.2,
+            "bpg": 1.8,
+            "shooting": { "fg": 51.5, "threeP": 34.2, "ft": 82.1 },
+            "astToTurnover": 1.8
         },
-        "aiArchetype": "Paint Beast",
-        "starRating": 4.3,
-        "aiSummarization": "He's good at Basketball"
+        "aiArchetype": "Modern Stretch 4",
+        "starRating": 5
     },
     {
-        "id": "a2",
-        "name": "Devansh Kochhar",
+        "id": "b2",
+        "name": "Justin Sunga",
+        "jersey": "2",
         "bio": {
-            "height": "6'0\"",
-            "school": "Queen Elizabeth Secondary",
-            "grad": 2023
+            "height": "5'10\"",
+            "wingspan": "6'1\"",
+            "weight": "170 lbs",
+            "school": "Burnaby South",
+            "clubTeam": "AthElite",
+            "gpa": 3.9,
+            "grad": 2026,
+            "position": "Point Guard",
+            "hand": "Right"
         },
         "stats": {
-            "ppg": 12.2,
-            "rpg": 10.3,
-            "apg": 5.2
+            "ppg": 15.8,
+            "rpg": 3.1,
+            "apg": 8.4,
+            "spg": 2.5,
+            "bpg": 0.1,
+            "shooting": { "fg": 46.8, "threeP": 39.5, "ft": 88.4 },
+            "astToTurnover": 3.2
         },
-        "aiArchetype": "Lebron James",
-        "starRating": 4.2
-    }, 
+        "aiArchetype": "Floor General",
+        "starRating": 5
+    },
     {
-        "id": "a3",
-        "name": "Gabe Gamboa",
+        "id": "b3",
+        "name": "Nikola Guzina",
+        "jersey": "6",
         "bio": {
-            "height": "5'9\"",
-            "school": "Queen Elizabeth Secondary",
-            "grad": 2023
+            "height": "6'10\"",
+            "wingspan": "7'2\"",
+            "weight": "235 lbs",
+            "school": "King George Secondary",
+            "clubTeam": "Vancouver Sports Club",
+            "gpa": 3.5,
+            "grad": 2026,
+            "position": "Center",
+            "hand": "Right"
         },
         "stats": {
-            "ppg": 10.2,
-            "rpg": 4.3,
-            "apg": 12.2
+            "ppg": 19.2,
+            "rpg": 12.5,
+            "apg": 1.8,
+            "spg": 0.5,
+            "bpg": 3.1,
+            "shooting": { "fg": 58.4, "threeP": 22.0, "ft": 65.8 },
+            "astToTurnover": 0.7
         },
-        "aiArchetype": "Point God",
+        "aiArchetype": "Interior Anchor",
+        "starRating": 4
+    },
+    {
+        "id": "b4",
+        "name": "Chris Ainsley",
+        "jersey": "11",
+        "bio": {
+            "height": "6'6\"",
+            "wingspan": "6'9\"",
+            "weight": "195 lbs",
+            "school": "St. Thomas More",
+            "clubTeam": "BC United",
+            "gpa": 3.7,
+            "grad": 2027,
+            "position": "Forward",
+            "hand": "Left"
+        },
+        "stats": {
+            "ppg": 17.5,
+            "rpg": 6.8,
+            "apg": 2.5,
+            "spg": 1.4,
+            "bpg": 1.1,
+            "shooting": { "fg": 49.2, "threeP": 36.8, "ft": 79.5 },
+            "astToTurnover": 1.5
+        },
+        "aiArchetype": "Two-Way Wing",
+        "starRating": 4
+    },
+    {
+        "id": "b5",
+        "name": "Milan Pasquale",
+        "jersey": "5",
+        "bio": {
+            "height": "6'2\"",
+            "wingspan": "6'3\"",
+            "weight": "180 lbs",
+            "school": "Brentwood College",
+            "clubTeam": "Island Hoops",
+            "gpa": 4.0,
+            "grad": 2026,
+            "position": "Guard",
+            "hand": "Right"
+        },
+        "stats": {
+            "ppg": 20.1,
+            "rpg": 4.5,
+            "apg": 4.2,
+            "spg": 1.8,
+            "bpg": 0.3,
+            "shooting": { "fg": 44.5, "threeP": 41.2, "ft": 91.0 },
+            "astToTurnover": 2.1
+        },
+        "aiArchetype": "Sharpshooter",
+        "starRating": 4
+    },
+    {
+        "id": "b6",
+        "name": "Toren Franklin",
+        "jersey": "10",
+        "bio": {
+            "height": "6'1\"",
+            "wingspan": "6'4\"",
+            "weight": "175 lbs",
+            "school": "Oak Bay Secondary",
+            "clubTeam": "Canada West",
+            "gpa": 3.6,
+            "grad": 2027,
+            "position": "Guard",
+            "hand": "Right"
+        },
+        "stats": {
+            "ppg": 14.3,
+            "rpg": 3.8,
+            "apg": 6.1,
+            "spg": 2.1,
+            "bpg": 0.2,
+            "shooting": { "fg": 42.1, "threeP": 33.5, "ft": 84.6 },
+            "astToTurnover": 2.8
+        },
+        "aiArchetype": "Scrappie Playmaker",
+        "starRating": 3
+    },
+    {
+        "id": "b7",
+        "name": "Raj Dhadda",
+        "jersey": "7",
+        "bio": {
+            "height": "6'5\"",
+            "wingspan": "6'6\"",
+            "weight": "185 lbs",
+            "school": "Rutland Secondary",
+            "clubTeam": "Kelowna Basketball",
+            "gpa": 3.4,
+            "grad": 2026,
+            "position": "Guard",
+            "hand": "Right"
+        },
+        "stats": {
+            "ppg": 16.7,
+            "rpg": 5.2,
+            "apg": 3.0,
+            "spg": 1.1,
+            "bpg": 0.7,
+            "shooting": { "fg": 47.3, "threeP": 35.1, "ft": 76.4 },
+            "astToTurnover": 1.2
+        },
+        "aiArchetype": "Slashing Guard",
+        "starRating": 3
+    },
+    {
+        "id": "b8",
+        "name": "Karan Aujla",
+        "jersey": "15",
+        "bio": {
+            "height": "6'8\"",
+            "wingspan": "7'0\"",
+            "weight": "240 lbs",
+            "school": "Burnaby South",
+            "clubTeam": "AthElite",
+            "gpa": 3.9,
+            "grad": 2026,
+            "position": "Forward",
+            "hand": "Right"
+        },
+        "stats": {
+            "ppg": 18.9,
+            "rpg": 11.2,
+            "apg": 2.4,
+            "spg": 0.6,
+            "bpg": 2.1,
+            "shooting": { "fg": 56.2, "threeP": 28.4, "ft": 72.1 },
+            "astToTurnover": 1.1
+        },
+        "aiArchetype": "Interior Dominator",
         "starRating": 5
     }
 ]
