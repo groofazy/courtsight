@@ -1,7 +1,7 @@
 [
     {
         "id": "b1",
-        "name": "Nylan Roberts",
+        "name": "Athlete",
         "performanceHistory": [
             { "game": "G1", "points": 18 },
             { "game": "G2", "points": 24 },
@@ -9,7 +9,7 @@
             { "game": "G4", "points": 30 },
             { "game": "G5", "points": 22 }
         ],
-        "imageUrl": "/images/players/nylan-roberts.jpg",
+        "imageUrl": "/images/players/blank.jpg",
         "jersey": "0",
         "bio": {
             "height": "6'7\"",
@@ -36,7 +36,7 @@
     },
     {
         "id": "b2",
-        "name": "Justin Sunga",
+        "name": "Athlete",
         "performanceHistory": [
             { "game": "G1", "points": 18 },
             { "game": "G2", "points": 24 },
@@ -44,7 +44,7 @@
             { "game": "G4", "points": 30 },
             { "game": "G5", "points": 22 }
         ],
-        "imageUrl": "/images/players/justin-sunga.jpg",
+        "imageUrl": "/images/players/blank.jpg",
         "jersey": "2",
         "bio": {
             "height": "5'10\"",
@@ -71,7 +71,7 @@
     },
     {
         "id": "b3",
-        "name": "Nikola Guzina",
+        "name": "Athlete",
         "performanceHistory": [
             { "game": "G1", "points": 18 },
             { "game": "G2", "points": 24 },
@@ -79,7 +79,7 @@
             { "game": "G4", "points": 30 },
             { "game": "G5", "points": 22 }
         ],
-        "imageUrl": "/images/players/d.jpg",
+        "imageUrl": "/images/players/blank.jpg",
         "jersey": "6",
         "bio": {
             "height": "6'10\"",
@@ -106,7 +106,7 @@
     },
     {
         "id": "b4",
-        "name": "Chris Ainsley",
+        "name": "Athlete",
         "performanceHistory": [
             { "game": "G1", "points": 18 },
             { "game": "G2", "points": 24 },
@@ -141,7 +141,7 @@
     },
     {
         "id": "b5",
-        "name": "Milan Pasquale",
+        "name": "Athlete",
         "performanceHistory": [
             { "game": "G1", "points": 18 },
             { "game": "G2", "points": 24 },
@@ -176,7 +176,7 @@
     },
     {
         "id": "b6",
-        "name": "Toren Franklin",
+        "name": "Athlete",
         "performanceHistory": [
             { "game": "G1", "points": 18 },
             { "game": "G2", "points": 24 },
@@ -211,7 +211,7 @@
     },
     {
         "id": "b7",
-        "name": "Raj Dhadda",
+        "name": "Athlete",
         "performanceHistory": [
             { "game": "G1", "points": 18 },
             { "game": "G2", "points": 24 },
@@ -246,7 +246,7 @@
     },
     {
         "id": "b8",
-        "name": "Karan Aujla",
+        "name": "Athlete",
         "performanceHistory": [
             { "game": "G1", "points": 18 },
             { "game": "G2", "points": 24 },
@@ -254,7 +254,7 @@
             { "game": "G4", "points": 30 },
             { "game": "G5", "points": 22 }
         ],
-        "imageUrl": "/images/players/karan-aujla.jpg",
+        "imageUrl": "/images/players/blank.jpg",
         "jersey": "15",
         "bio": {
             "height": "6'8\"",
