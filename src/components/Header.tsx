@@ -49,7 +49,7 @@ export default function Header() {
       </nav>
       
       <h1 className="font-audiowide text-2xl text-white lowercase tracking-tighter">
-        courtsight
+        hoopsight
       </h1>
     </header>
   );

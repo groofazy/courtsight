@@ -32,7 +32,7 @@ export default async function PlayerProfile({ params }: { params: Promise<{ id: 
           <Link href="/" className="text-xs font-bold uppercase tracking-widest text-zinc-500 hover:text-blue-500 transition-colors">
             ← Dashboard
           </Link>
-          <h1 className="font-audiowide text-xl lowercase text-white">courtsight</h1>
+          <h1 className="font-audiowide text-xl lowercase text-white">hoopsight</h1>
         </div>
 
         {/* 1. Identity Row */}

@@ -12,7 +12,7 @@ export default function WelcomeHero() {
         // Add pointer-events-auto here if you want the text itself to be interactive
         className="font-audiowide text-5xl md:text-7xl text-white uppercase italic tracking-tighter pointer-events-auto"
       >
-        welcome to courtsight
+        welcome to hoopsight
       </motion.h2>
     </div>
   );
