@@ -10,9 +10,18 @@ export default function BookmarksPage() {
   const { bookmarks } = useBookmarks(); // This gives you an array of IDs like ['b1', 'b2']
   const [bookmarkedAthletes, setBookmarkedAthletes] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [mounted, setMounted] = useState(false);
+
   const supabase = createClient();
 
+// Handle mounting
   useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
+
     async function fetchBookmarkedPlayers() {
       if (bookmarks.length === 0) {
         setBookmarkedAthletes([]);
@@ -34,7 +43,10 @@ export default function BookmarksPage() {
 
     fetchBookmarkedPlayers();
   }, [bookmarks, supabase]);
+  
+  if (!mounted) return null;
 
+  
   return (
     <main className="min-h-screen bg-black text-white p-6 md:p-12">
       <div className="mx-auto max-w-7xl space-y-8">
