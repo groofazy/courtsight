@@ -18,11 +18,11 @@ export default function PlayerProfileHeader({ player }: PlayerProfileHeaderProps
         </h1>
         <div className="flex gap-4 items-center">
           <span className="text-blue-500 font-bold uppercase tracking-[0.2em] text-sm">
-            #{player.jersey} • {player.bio.position}
+            #{player?.jersey} • {player?.position || player?.bio?.position}
           </span>
           <span className="h-1 w-1 rounded-full bg-zinc-700" />
           <p className="text-zinc-500 font-medium">
-            {player.bio.school} • Class of {player.bio.grad}
+            {player.school} • Class of {player.grad_year}
           </p>
         </div>
       </div>

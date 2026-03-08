@@ -1,54 +1,62 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useBookmarks } from "@/hooks/useBookmarks";
-import players from "@data/players.json";
+import { createClient } from '@/utils/supabase/client'; // Use client-side utility
 import Link from "next/link";
 import { ArrowLeft, Bookmark } from "lucide-react";
-import BookmarkPlayerGrid from "@/components/BookmarkPlayerGrid";
-import EmptyBookmarksState from "@/components/EmptyBookmarksState";
-import CompareActionBar from "@/components/CompareActionBar";
+import DashboardGrid from "@/components/DashboardGrid";
 
 export default function BookmarksPage() {
-  const { bookmarks } = useBookmarks();
-  const [selectedIds, setSelectedIds] = useState<string[]>([]);
-  
-  const savedPlayers = players.filter(p => bookmarks.includes(p.id));
+  const { bookmarks } = useBookmarks(); // This gives you an array of IDs like ['b1', 'b2']
+  const [bookmarkedAthletes, setBookmarkedAthletes] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const supabase = createClient();
 
-  const toggleSelection = (id: string) => {
-    setSelectedIds(prev => 
-      prev.includes(id) ? prev.filter(i => i !== id) : [...prev, id].slice(-2)
-    );
-  };
+  useEffect(() => {
+    async function fetchBookmarkedPlayers() {
+      if (bookmarks.length === 0) {
+        setBookmarkedAthletes([]);
+        setLoading(false);
+        return;
+      }
+
+      // Query Supabase for athletes where ID is in our bookmarks array
+      const { data, error } = await supabase
+        .from('athletes')
+        .select('*')
+        .in('id', bookmarks);
+
+      if (!error && data) {
+        setBookmarkedAthletes(data);
+      }
+      setLoading(false);
+    }
+
+    fetchBookmarkedPlayers();
+  }, [bookmarks, supabase]);
 
   return (
-    <main className="min-h-screen bg-black p-8 pt-24 pb-32">
-      <div className="max-w-7xl mx-auto">
-        <Link href="/" className="flex items-center gap-2 text-zinc-500 hover:text-emerald-500 mb-8 transition-colors group">
-          <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
-          <span className="text-[10px] font-bold uppercase tracking-widest font-audiowide">Dashboard</span>
+    <main className="min-h-screen bg-black text-white p-6 md:p-12">
+      <div className="mx-auto max-w-7xl space-y-8">
+        <Link href="/" className="inline-flex items-center gap-2 text-zinc-500 hover:text-emerald-500 transition-colors">
+          <ArrowLeft size={16} />
+          <span className="text-xs font-bold uppercase tracking-widest">Back to Dashboard</span>
         </Link>
 
-        <header className="mb-12">
-          <div className="flex items-center gap-3 mb-2">
-            <Bookmark className="text-emerald-500" size={32} />
-            <h1 className="font-audiowide text-4xl text-white uppercase italic tracking-tighter">
-              Scout <span className="text-emerald-500">Shortlist</span>
-            </h1>
-          </div>
-          <p className="text-zinc-500 font-medium">Select two prospects to generate a Head-to-Head comparison.</p>
-        </header>
+        <div className="flex items-center gap-3">
+          <Bookmark className="text-emerald-500" fill="currentColor" />
+          <h1 className="font-audiowide text-4xl">My Scouting List</h1>
+        </div>
 
-        {savedPlayers.length === 0 ? (
-          <EmptyBookmarksState />
+        {loading ? (
+          <p className="text-zinc-500">Loading your prospects...</p>
+        ) : bookmarkedAthletes.length > 0 ? (
+          <DashboardGrid players={bookmarkedAthletes} />
         ) : (
-          <BookmarkPlayerGrid 
-            savedPlayers={savedPlayers}
-            selectedIds={selectedIds}
-            onToggleSelection={toggleSelection}
-          />
+          <div className="py-20 text-center border border-dashed border-zinc-800 rounded-3xl">
+            <p className="text-zinc-500">No prospects bookmarked yet.</p>
+          </div>
         )}
-
-        <CompareActionBar selectedIds={selectedIds} />
       </div>
     </main>
   );

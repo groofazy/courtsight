@@ -7,36 +7,29 @@ import { FilterSelect } from "./FilterSelect";
 
 export default function DashboardGrid({ players }: { players: any[] }) {
   const [search, setSearch] = useState("");
-  const [sortBy, setSortBy] = useState("stars");
-  const [filters, setFilters] = useState({ 
-    school: "all", 
-    grad: "all", 
-    pos: "all", 
-    height: "all",
+  // Update default to 'ppg' since you removed star ratings
+  const [sortBy, setSortBy] = useState("ppg"); 
+  const [filters, setFilters] = useState({
+    school: "all",
+    grad: "all",
+    pos: "all",
     clubTeam: "all",
     hand: "all",
     stars: "all",
-    gpa:"all",
-    weight:"all"
+    gpa: "all",
+    weight: "all"
   });
 
-  // 1. Logic moved to the "Engine"
   const filteredPlayers = usePlayerFilters(players, search, filters, sortBy);
 
-  // 2. Data derivation moved into a config object
   const filterConfigs = [
-    { label: "School", key: "school", options: Array.from(new Set(players.map(p => p.bio.school))).sort() },
-    { label: "Club Team", key: "clubTeam", options: Array.from(new Set(players.map(p => p.bio.clubTeam))).sort() },
-    { label: "Position", key: "pos", options: Array.from(new Set(players.map(p => p.bio.position))).sort() },
-    { label: "Grad Year", key: "grad", options: Array.from(new Set(players.map(p => p.bio.grad.toString()))).sort() },
-    { label: "Strong Hand", key: "hand", options: Array.from(new Set(players.map(p => p.bio.hand))).sort() },
-    { label: "Stars", key: "stars", options: ["1", "2", "3", "4", "5"] },
-    { label: "Min GPA", key: "gpa", options: ["3.0", "3.5", "3.8", "4.0"] }, // Added
-    { label: "Weight", key: "weight", options: Array.from(new Set(players.map(p => p.bio.weight))).sort() }, // Added
+    { label: "School", key: "school", options: Array.from(new Set(players.map(p => p.school))).filter(Boolean).sort() },
+    { label: "Position", key: "pos", options: Array.from(new Set(players.map(p => p.position))).filter(Boolean).sort() },
+    { label: "Grad Year", key: "grad", options: Array.from(new Set(players.map(p => p.grad_year?.toString()))).filter(Boolean).sort() },
   ];
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 max-w-7xl mx-auto">
       <div className="bg-zinc-900 border border-zinc-800 p-6 rounded-3xl shadow-xl space-y-6">
         <SearchFilter search={search} setSearch={setSearch} sortBy={sortBy} setSortBy={setSortBy} />
         
@@ -47,52 +40,40 @@ export default function DashboardGrid({ players }: { players: any[] }) {
               label={cfg.label} 
               options={cfg.options} 
               value={filters[cfg.key as keyof typeof filters]} 
-              // Added ': string' to val to fix the TypeScript error
               onChange={(val: string) => setFilters(prev => ({ ...prev, [cfg.key]: val }))} 
             />
           ))}
         </div>
       </div>
 
-    {/* Result Counter Badge */}
-    <div className="flex items-center justify-between px-2">
-      <div className="flex items-center gap-2">
-        <span className="flex h-2 w-2 rounded-full bg-blue-500 animate-pulse" />
-        <p className="text-sm font-medium text-zinc-500">
-          Showing <span className="text-white font-bold">{filteredPlayers.length}</span> prospects
-        </p>
+      <div className="flex items-center justify-between px-2">
+        <div className="flex items-center gap-2">
+          <span className="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+          <p className="text-sm font-medium text-zinc-500">
+            Showing <span className="text-white font-bold">{filteredPlayers.length}</span> prospects
+          </p>
+        </div>
+        
+        {(search || Object.values(filters).some(v => v !== 'all')) && (
+          <button 
+            onClick={() => {
+              setSearch("");
+              setFilters({ school: "all", grad: "all", pos: "all", clubTeam: "all", hand: "all", stars: "all", gpa: "all", weight: "all" });
+            }}
+            className="text-[10px] font-bold text-emerald-500 uppercase tracking-tighter hover:text-emerald-400 transition-colors"
+          >
+            Reset Filters
+          </button>
+        )}
       </div>
-      
-      {/* Conditional 'Clear All' button */}
-      {(search || Object.values(filters).some(v => v !== 'all')) && (
-        <button 
-          onClick={() => {
-            setSearch("");
-            setFilters({ 
-              school: "all", 
-              grad: "all", 
-              pos: "all", 
-              height: "all", 
-              clubTeam: "all", 
-              hand: "all", 
-              stars: "all",
-              gpa:"all",
-              weight: "all"
-             });
-          }}
-          className="text-[10px] font-bold text-blue-500 uppercase tracking-tighter hover:text-blue-400 transition-colors"
-        >
-          Reset Filters
-        </button>
-      )}
-    </div>
 
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pb-12">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 pb-12">
         {filteredPlayers.map((player) => (
-          <Link href={`/player/${player.id}`} 
-          key={player.id} 
-          className="relative z-10 block transition-transform duration-200 hover:scale-[1.02] cursor-pointer">
+          <Link 
+            href={`/player/${player.id}`} 
+            key={player.id} 
+            className="relative z-10 block transition-transform duration-200 hover:scale-[1.02] cursor-pointer"
+          >
             <PlayerCard player={player} />
           </Link>
         ))}
@@ -101,46 +82,49 @@ export default function DashboardGrid({ players }: { players: any[] }) {
   );
 }
 
-// Logic extracted to a focused helper
+// Fixed Helper Function with Dynamic Stat Averaging
 function usePlayerFilters(players: any[], search: string, filters: any, sortBy: string) {
   return useMemo(() => {
+    // Helper to calculate averages from the nested game_stats table
+    const getAvg = (gameStats: any[], key: string) => {
+      if (!gameStats || gameStats.length === 0) return 0;
+      const total = gameStats.reduce((acc, curr) => acc + (curr[key] || 0), 0);
+      return total / gameStats.length;
+    };
+
     return [...players]
       .filter((p) => {
-        // 1. Global Search: Checks Name, School, Club, Archetype, and Position
         const searchLower = search.toLowerCase();
-        const matchesSearch = 
-          p.name.toLowerCase().includes(searchLower) || 
-          p.bio.school.toLowerCase().includes(searchLower) ||
-          p.bio.clubTeam.toLowerCase().includes(searchLower) ||
-          p.aiArchetype.toLowerCase().includes(searchLower) ||
-          p.bio.position.toLowerCase().includes(searchLower);
         
-        // 2. Exact Category Filters
-    const matchesSchool = filters.school === "all" || p.bio.school === filters.school;
-    const matchesGrad = filters.grad === "all" || p.bio.grad.toString() === filters.grad;
-    const matchesPos = filters.pos === "all" || p.bio.position === filters.pos;
-    const matchesHeight = filters.height === "all" || p.bio.height === filters.height;
-    const matchesClub = filters.clubTeam === "all" || p.bio.clubTeam === filters.clubTeam;
-    const matchesHand = filters.hand === "all" || p.bio.hand === filters.hand;
-    const matchesStars = filters.stars === "all" || p.starRating.toString() === filters.stars;
-    // Inside the .filter() function
-    const matchesGPA = filters.gpa === "all" || p.bio.gpa >= parseFloat(filters.gpa);
-    const matchesWeight = filters.weight === "all" || p.bio.weight === filters.weight;
+        const matchesSearch = 
+          (p.name?.toLowerCase().includes(searchLower)) || 
+          (p.school?.toLowerCase().includes(searchLower)) ||
+          (p.position?.toLowerCase().includes(searchLower));
+        
+        const matchesSchool = filters.school === "all" || p.school === filters.school;
+        const matchesGrad = filters.grad === "all" || p.grad_year?.toString() === filters.grad;
+        const matchesPos = filters.pos === "all" || p.position?.toLowerCase() === filters.pos?.toLowerCase();
 
-    return matchesSearch && matchesSchool && matchesGrad && matchesPos && 
-          matchesHeight && matchesClub && matchesHand && matchesStars && 
-          matchesGPA && matchesWeight;
+        return matchesSearch && matchesSchool && matchesGrad && matchesPos;
       })
       .sort((a, b) => {
-        // 3. Dynamic Sorting for Nested Stats
-        // This handles top-level (starRating) and nested (stats.ppg, stats.shooting.fg)
-        const getVal = (obj: any, path: string) => {
-          if (path === 'stars') return obj.starRating;
-          if (path === 'fg') return obj.stats.shooting.fg;
-          return obj.stats[path];
-        };
-
-        return getVal(b, sortBy) - getVal(a, sortBy);
+        // Sort by Points Per Game
+        if (sortBy === 'ppg') {
+          return getAvg(b.game_stats, 'points') - getAvg(a.game_stats, 'points');
+        }
+        // Sort by 3-Pointers Made per game
+        if (sortBy === 'tpg') {
+          return getAvg(b.game_stats, 'threes_made') - getAvg(a.game_stats, 'threes_made');
+        }
+        // Sort by 2-Pointers Made per game
+        if (sortBy === 'twpg') {
+          return getAvg(b.game_stats, 'twos_made') - getAvg(a.game_stats, 'twos_made');
+        }
+        // Alphabetical fallback
+        if (sortBy === 'name') {
+          return (a.name || "").localeCompare(b.name || "");
+        }
+        return 0;
       });
   }, [search, filters, sortBy, players]);
 }

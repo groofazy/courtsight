@@ -8,34 +8,38 @@ interface SearchFilterProps {
 }
 
 export function SearchFilter({ search, setSearch, sortBy, setSortBy }: SearchFilterProps) {
+  // Updated sort options to match your specific requirements
+  const sortOptions = [
+    { id: 'ppg', label: 'Points' },
+    { id: 'tpg', label: '3PM' }, // Threes Per Game
+    { id: 'twpg', label: '2PM' }, // Twos Per Game
+    { id: 'name', label: 'A-Z' },
+  ];
+
   return (
     <div className="flex flex-col md:flex-row gap-4">
+      {/* Search Input */}
       <div className="relative flex-1">
         <input 
           type="text"
           value={search}
-          placeholder="Search by name or school..."
-          className="w-full bg-black border border-zinc-700 rounded-xl py-3 pl-10 pr-4 text-sm text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all"
+          placeholder="Search by name, school, or position..."
+          className="w-full bg-black border border-zinc-700 rounded-xl py-3 pl-10 pr-4 text-sm text-white focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none transition-all placeholder:text-zinc-600"
           onChange={(e) => setSearch(e.target.value)}
         />
         <SearchIcon className="absolute left-3 top-3.5 w-4 h-4 text-zinc-500" />
       </div>
 
+      {/* Sort Toggle Group */}
       <div className="flex flex-wrap gap-1 bg-black p-1 rounded-xl border border-zinc-800">
-        {[
-          { id: 'stars', label: 'Rank' },
-          { id: 'ppg', label: 'PPG' },
-          { id: 'fg', label: 'FG%' },
-          { id: 'threeP', label: '3PT%' },
-          { id: 'astToTurnover', label: 'AST/TO' }
-        ].map((item) => (
+        {sortOptions.map((item) => (
           <button
             key={item.id}
             onClick={() => setSortBy(item.id)}
-            className={`px-4 py-2 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all ${
+            className={`px-4 py-2 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all duration-200 ${
               sortBy === item.id 
-                ? "bg-blue-600 text-white shadow-lg" 
-                : "text-zinc-500 hover:text-zinc-300"
+                ? "bg-emerald-600 text-white shadow-[0_0_15px_rgba(16,185,129,0.2)]" 
+                : "text-zinc-500 hover:text-zinc-300 hover:bg-zinc-900"
             }`}
           >
             {item.label}
