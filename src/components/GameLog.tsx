@@ -42,10 +42,21 @@ export default function GameLog({ games }: GameLogProps) {
             {games.length > 0 ? (
               games.map((game, idx) => (
                 <tr key={idx} className="hover:bg-zinc-800/30 transition-colors group">
-                  <td className="px-6 py-4 text-zinc-500 font-medium">
-                    {new Date(game.game_date).toLocaleDateString()}
-                  </td>
-                  <td className="px-6 py-4 text-white font-bold italic tracking-tight">
+                <td className="px-6 py-4 text-zinc-500 font-medium text-xs">
+                  {(() => {
+                    // Split "2026-03-08" into [2026, 03, 08]
+                    const [year, month, day] = game.game_date.split('-').map(Number);
+                    // Create date using local components (Note: month is 0-indexed in JS)
+                    const localDate = new Date(year, month - 1, day);
+                    
+                    return localDate.toLocaleDateString('en-US', {
+                      month: 'short',
+                      day: 'numeric',
+                      year: 'numeric'
+                    });
+                  })()}
+                </td>
+                  <td className="px-6 py-4 text-white font-bold tracking-tight">
                     {game.game_name}
                   </td>
                   <td className="px-6 py-4 text-emerald-500 font-black text-lg">
