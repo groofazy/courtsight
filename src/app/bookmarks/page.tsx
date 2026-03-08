@@ -7,7 +7,7 @@ import { ArrowLeft, Bookmark } from "lucide-react";
 import DashboardGrid from "@/components/DashboardGrid";
 
 export default function BookmarksPage() {
-  const { bookmarks } = useBookmarks(); // This gives you an array of IDs like ['b1', 'b2']
+  const { bookmarks } = useBookmarks(); 
   const [bookmarkedAthletes, setBookmarkedAthletes] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [mounted, setMounted] = useState(false);
@@ -32,8 +32,8 @@ export default function BookmarksPage() {
       // Query Supabase for athletes where ID is in our bookmarks array
       const { data, error } = await supabase
         .from('athletes')
-        .select('*')
-        .in('id', bookmarks);
+        .select('*, game_stats(*)')
+        .in('id', bookmarks.map(id => Number(id)));
 
       if (!error && data) {
         setBookmarkedAthletes(data);
@@ -43,6 +43,10 @@ export default function BookmarksPage() {
 
     fetchBookmarkedPlayers();
   }, [bookmarks, supabase]);
+
+  const visibleAthletes = bookmarkedAthletes.filter(a => 
+    bookmarks.map(String).includes(String(a.id))
+);
   
   if (!mounted) return null;
 
@@ -63,7 +67,7 @@ export default function BookmarksPage() {
         {loading ? (
           <p className="text-zinc-500">Loading your prospects...</p>
         ) : bookmarkedAthletes.length > 0 ? (
-          <DashboardGrid players={bookmarkedAthletes} />
+          <DashboardGrid players={visibleAthletes} />
         ) : (
           <div className="py-20 text-center border border-dashed border-zinc-800 rounded-3xl">
             <p className="text-zinc-500">No prospects bookmarked yet.</p>

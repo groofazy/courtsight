@@ -12,7 +12,7 @@ interface PlayerInfo {
 export default function PlayerCard({ player }: PlayerInfo) {
   const { bookmarks, toggleBookmark } = useBookmarks();
   const router = useRouter();
-  const isBookmarked = bookmarks.includes(player.id);
+  const isBookmarked = bookmarks.map(String).includes(String(player.id));
 
   const handleNavigate = () => {
     router.push(`/player/${player.id}`);
@@ -52,9 +52,10 @@ export default function PlayerCard({ player }: PlayerInfo) {
       <button 
         onClick={(e) => {
           e.stopPropagation();
+          e.preventDefault();
           toggleBookmark(player.id);
         }}
-        className="absolute top-8 right-8 z-30 p-2.5 rounded-full bg-black/60 backdrop-blur-md border border-white/10 hover:scale-110 transition-transform active:scale-95 group/star"
+        className="absolute top-8 right-8 z-50 p-2.5 rounded-full bg-black/60 backdrop-blur-md border border-white/10 hover:scale-110 transition-transform active:scale-95 group/star"
       >
         <Star 
           size={18} 
@@ -67,7 +68,7 @@ export default function PlayerCard({ player }: PlayerInfo) {
       </button>
 
       {/* Image uses the flat image_url column */}
-      <PlayerImage src={player.image_url} name={player.name} className="w-full h-50 rounded-2xs mb-4 pointer-events-none" />
+      {/* <PlayerImage src={player.image_url} name={player.name} className="w-full h-50 rounded-2xs mb-4 pointer-events-none" /> */}
 
       <div className="flex justify-between items-start">
         <div>
@@ -82,14 +83,14 @@ export default function PlayerCard({ player }: PlayerInfo) {
             <span className="text-[13px] font-bold text-zinc-500 uppercase tracking-widest font-audiowide">{player.position}</span>
           </div>
           {/* Flat columns for school and grad_year */}
-          <p className="text-[13px] font-bold text-zinc-500 uppercase tracking-widest font-audiowide">{player.school}</p>
-          <p className="text-[13px] font-bold text-zinc-500 uppercase tracking-widest font-audiowide">Class of {player.grad_year}</p>
+          <p className="text-[13px] font-bold text-zinc-500 lowercase tracking-widest font-audiowide">{player.school}</p>
+          <p className="text-[13px] font-bold text-zinc-500 lowercase tracking-widest font-audiowide">Class of {player.grad_year}</p>
 
         </div>
         <div className="flex flex-col items-end gap-1">
-          <span className="text-xs font-bold bg-emerald-500/10 text-emerald-500 px-2 py-1 rounded-lg uppercase tracking-wider border border-emerald-500/20">
+          {/* <span className="text-xs font-bold bg-emerald-500/10 text-emerald-500 px-2 py-1 rounded-lg uppercase tracking-wider border border-emerald-500/20">
             {player.height}
-          </span>
+          </span> */}
           {/* <span className="text-[9px] text-zinc-400 font-medium text-nowrap">WS: {player.wingspan}</span> */}
         </div>
       </div>
