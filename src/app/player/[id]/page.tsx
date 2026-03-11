@@ -71,10 +71,10 @@ export default async function PlayerProfile({ params }: { params: Promise<{ id: 
       <div className="mx-auto max-w-7xl space-y-12">
         {/* Navigation & Brand Header */}
         <div className="flex justify-between items-center border-b border-zinc-800 pb-6">
-          <Link href="/" className="text-[14px] font-bold uppercase tracking-widest text-zinc-500 hover:text-emerald-500 transition-colors">
+          <Link href="/" className="text-xl md:text-xl font-bold uppercase tracking-widest text-zinc-500 hover:text-emerald-500 transition-colors">
             ← Dashboard
           </Link>
-          <h1 className="font-audiowide text-5xl lowercase text-white">hoopsight</h1>
+          <h1 className="font-audiowide text-xl md:text-5xl lowercase text-white">courtsight</h1>
         </div>
 
         {/* 1. Identity Row - Passing 'athlete' instead of 'player' */}
