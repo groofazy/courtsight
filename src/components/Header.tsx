@@ -14,7 +14,7 @@ export default function Header() {
   }, []);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-12 py-6 bg-black/80 backdrop-blur-md border-b border-zinc-900">
+    <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-12 py-6 bg-black/80 backdrop-blur-md border-b border-zinc-900">
       <nav className="flex gap-8 items-center">
         <Link 
           href="/bookmarks" 
@@ -26,7 +26,7 @@ export default function Header() {
               mounted && bookmarks.length > 0 ? "text-emerald-500 fill-emerald-500/20" : "text-zinc-500 group-hover:text-emerald-500"
             }`} 
           />
-          <span className="text-[14px] font-bold uppercase tracking-[0.2em] text-zinc-500 group-hover:text-emerald-500 transition-colors">
+          <span className="text font-bold uppercase tracking-[0.2em] text-zinc-500 group-hover:text-emerald-500 transition-colors hidden sm:inline">
             bookmarks
           </span>
 
@@ -39,7 +39,7 @@ export default function Header() {
         </Link>
       </nav>
       
-      <h1 className="font-audiowide text-5xl text-white lowercase tracking-tighter">
+      <h1 className="font-audiowide text-xl md:text-5xl text-white lowercase tracking-tighter">
         courtsight
       </h1>
     </header>

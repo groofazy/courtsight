@@ -10,7 +10,7 @@ export default function WelcomeHero() {
         animate={{ x: 0, opacity: 1 }}
         transition={{ type: "spring", damping: 20, stiffness: 100 }}
         // Add pointer-events-auto here if you want the text itself to be interactive
-        className="font-audiowide text-5xl md:text-3xl text-white uppercase italic tracking-tighter pointer-events-auto"
+        className="font-audiowide text-xl md:text-5xl text-white uppercase italic tracking-tighter pointer-events-auto"
       >
         the data platform for BC highschool basketball
       </motion.h2>
